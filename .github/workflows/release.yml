@@ -1,0 +1,98 @@
+name: Release CI
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. v1.0.0)"
+        required: true
+        default: "v1.0.0"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Determine version tag
+        id: meta
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ github.event.inputs.tag }}"
+          else
+            TAG="${GITHUB_REF#refs/tags/}"
+          fi
+          VER="${TAG#v}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "ver=$VER" >> "$GITHUB_OUTPUT"
+
+      - name: Setup .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Build ReentrySync Mod
+        run: |
+          dotnet build src/ReentrySync/ReentrySync.csproj \
+            -c Release \
+            -p:CI=true \
+            -p:Version=${{ steps.meta.outputs.ver }}
+
+      - name: Package Mod ZIP
+        shell: bash
+        run: |
+          mkdir -p dist/mod/BepInEx/plugins
+          cp src/ReentrySync/bin/Release/netstandard2.1/ReentrySync.dll dist/mod/BepInEx/plugins/
+          cp src/ReentrySync/bin/Release/netstandard2.1/Fleck.dll dist/mod/BepInEx/plugins/
+          cp scripts/install.ps1 scripts/install.bat README.md dist/mod/
+          (cd dist/mod && zip -r "../ReentrySync-Mod-${{ steps.meta.outputs.tag }}.zip" .)
+
+      - name: Publish Dedicated Relay Server (Windows x64)
+        run: |
+          dotnet publish src/ReentrySyncServer/ReentrySyncServer.csproj \
+            -c Release -r win-x64 --self-contained true \
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true \
+            -o dist/server-win
+          (cd dist/server-win && zip -r "../ReentrySyncServer-win-x64-${{ steps.meta.outputs.tag }}.zip" ReentrySyncServer.exe)
+
+      - name: Publish Dedicated Relay Server (Linux x64)
+        run: |
+          dotnet publish src/ReentrySyncServer/ReentrySyncServer.csproj \
+            -c Release -r linux-x64 --self-contained true \
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true \
+            -o dist/server-linux
+          tar -czf "dist/ReentrySyncServer-linux-x64-${{ steps.meta.outputs.tag }}.tar.gz" -C dist/server-linux ReentrySyncServer
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: "ReentrySync ${{ steps.meta.outputs.tag }}"
+          generate_release_notes: true
+          body: |
+            ## 🚀 Quick 1-Click Install (Mod + BepInEx)
+            Run this in **Windows PowerShell** (auto-detects Reentry, installs BepInEx 5.4.23.6 x64 if needed, and installs ReentrySync):
+            ```powershell
+            irm https://raw.githubusercontent.com/OttoApocalypse69/ReentrySync/main/scripts/install.ps1 | iex
+            ```
+            Or download **`install.bat`** below and double-click it!
+
+            ### Included Assets
+            - **`ReentrySync-Mod-${{ steps.meta.outputs.tag }}.zip`** — BepInEx plugin (`ReentrySync.dll` + `Fleck.dll`)
+            - **`ReentrySyncServer-win-x64-${{ steps.meta.outputs.tag }}.zip`** — Self-contained Windows Dedicated Relay Server (Room Codes)
+            - **`ReentrySyncServer-linux-x64-${{ steps.meta.outputs.tag }}.tar.gz`** — Self-contained Linux Dedicated Relay Server
+            - **`install.bat` / `install.ps1`** — Automated 1-click installer
+          files: |
+            dist/ReentrySync-Mod-${{ steps.meta.outputs.tag }}.zip
+            dist/ReentrySyncServer-win-x64-${{ steps.meta.outputs.tag }}.zip
+            dist/ReentrySyncServer-linux-x64-${{ steps.meta.outputs.tag }}.tar.gz
+            scripts/install.bat
+            scripts/install.ps1
