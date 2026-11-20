@@ -383,6 +383,11 @@ namespace ReentrySync.Web
             background: #0f2033;
             color: #fff;
         }}
+        .copilot-banner.holding {{
+            border-color: #f1c40f;
+            background: #2b230d;
+            color: #f9e79f;
+        }}
         .speed-group {{
             display: flex;
             gap: 6px;
@@ -700,9 +705,11 @@ namespace ReentrySync.Web
 
                 <!-- Live Copilot Activity & Speed Bar -->
                 <div id=""copilotBanner"" class=""copilot-banner"">
-                    <span id=""copilotStatusText"">Auto-Copilot standing by.</span>
+                    <span id=""copilotStatusText"" style=""flex:1;"">Auto-Copilot standing by.</span>
                     <div class=""speed-group"">
-                        <span style=""color:var(--text-dim); font-size:0.75rem;"">PACE:</span>
+                        <button class=""speed-btn"" id=""btnSkipHold"" style=""display:none; background:#d4ac0d; color:#000; border-color:#f4d03f;"" onclick=""skipCopilotHold()"">SKIP HOLD</button>
+                        <button class=""speed-btn active"" id=""btnRespectTs"" onclick=""toggleRespectTimestamps()"">TIMESTAMPS: ON</button>
+                        <span style=""color:var(--text-dim); font-size:0.75rem; margin-left:6px;"">PACE:</span>
                         <button class=""speed-btn"" id=""spd-fast"" onclick=""setCopilotSpeed(0.3)"">FAST</button>
                         <button class=""speed-btn active"" id=""spd-real"" onclick=""setCopilotSpeed(0.7)"">REALISTIC</button>
                         <button class=""speed-btn"" id=""spd-slow"" onclick=""setCopilotSpeed(1.2)"">SLOW</button>
@@ -1074,7 +1081,7 @@ namespace ReentrySync.Web
             }} else if (msg.type === 'checklist') {{
                 renderChecklist(msg.data);
             }} else if (msg.type === 'copilot_status') {{
-                updateCopilotBanner(msg.active, msg.text);
+                updateCopilotBanner(msg.active, msg.text, msg.holding);
             }} else if (msg.type === 'director') {{
                 renderDirector(msg.data);
             }} else if (msg.type === 'autopilot') {{
@@ -1476,21 +1483,52 @@ namespace ReentrySync.Web
             pickSite(`Custom (${{lat}}°, ${{lon}}°)`, lat, lon);
         }});
 
-        function updateCopilotBanner(active, text) {{
+        let respectTimestampsOn = true;
+
+        function updateCopilotBanner(active, text, holding) {{
             isAuto = !!active;
+            const isHold = !!holding;
             const btn = document.getElementById('btnAutoToggle');
             const banner = document.getElementById('copilotBanner');
             const statusText = document.getElementById('copilotStatusText');
+            const skipBtn = document.getElementById('btnSkipHold');
             if (btn) {{
                 btn.innerText = isAuto ? 'STOP COPILOT' : 'AUTO-COPILOT';
                 btn.style.background = isAuto ? '#e67e22' : 'var(--blue)';
             }}
             if (banner) {{
-                if (isAuto) banner.classList.add('running');
-                else banner.classList.remove('running');
+                banner.classList.toggle('running', isAuto && !isHold);
+                banner.classList.toggle('holding', isAuto && isHold);
+            }}
+            if (skipBtn) {{
+                skipBtn.style.display = (isAuto && isHold) ? 'inline-block' : 'none';
             }}
             if (statusText && text) {{
                 statusText.innerText = text;
+            }}
+        }}
+
+        function toggleRespectTimestamps() {{
+            respectTimestampsOn = !respectTimestampsOn;
+            updateTimestampButton(respectTimestampsOn);
+            if (ws && ws.readyState === WebSocket.OPEN) {{
+                ws.send(JSON.stringify({{ action: 'checklist_timestamps', enabled: String(respectTimestampsOn) }}));
+            }}
+        }}
+
+        function updateTimestampButton(enabled) {{
+            if (enabled === undefined || enabled === null) return;
+            respectTimestampsOn = !!enabled;
+            const btn = document.getElementById('btnRespectTs');
+            if (btn) {{
+                btn.innerText = respectTimestampsOn ? 'TIMESTAMPS: ON' : 'TIMESTAMPS: OFF';
+                btn.classList.toggle('active', respectTimestampsOn);
+            }}
+        }}
+
+        function skipCopilotHold() {{
+            if (ws && ws.readyState === WebSocket.OPEN) {{
+                ws.send(JSON.stringify({{ action: 'checklist_skip_hold' }}));
             }}
         }}
 
@@ -1530,7 +1568,8 @@ namespace ReentrySync.Web
             document.getElementById('chk-title').innerText = data.name || 'Active Checklist';
             document.getElementById('chk-subtitle').innerText = `${{data.count || 0}} steps remaining`;
 
-            updateCopilotBanner(data.copilotActive, data.copilotActivity);
+            updateCopilotBanner(data.copilotActive, data.copilotActivity, data.copilotHolding);
+            updateTimestampButton(data.respectTimestamps);
             updateSpeedButtons(data.copilotSpeed);
 
             // Populate Available Checklists Picker

@@ -105,7 +105,7 @@ namespace ReentrySync
             SmartChecklistEngine.OnCopilotActivity += status =>
             {
                 Logger.LogInfo($"[Copilot] {status}");
-                _server?.Broadcast($"{{\"type\":\"copilot_status\",\"active\":{(SmartChecklistEngine.IsAutoRunning ? "true" : "false")},\"text\":\"{JsonHelper.Escape(status)}\"}}");
+                _server?.Broadcast($"{{\"type\":\"copilot_status\",\"active\":{(SmartChecklistEngine.IsAutoRunning ? "true" : "false")},\"holding\":{(SmartChecklistEngine.IsHolding ? "true" : "false")},\"text\":\"{JsonHelper.Escape(status)}\"}}");
             };
 
             Logger.LogInfo($"{PluginInfo.PLUGIN_NAME} is active! Open http://localhost:8080/ in your browser.");
@@ -239,6 +239,28 @@ namespace ReentrySync
                                 BroadcastChecklistState();
                             });
                         }
+                        break;
+                    }
+
+                    case "checklist_timestamps":
+                    {
+                        bool en = !dict.TryGetValue("enabled", out var ev) || ev.Equals("true", StringComparison.OrdinalIgnoreCase);
+                        _mainThreadQueue.Enqueue(() =>
+                        {
+                            SmartChecklistEngine.RespectTimestamps = en;
+                            Logger.LogInfo($"[Checklist] Respect Timestamps: {(en ? "ON" : "OFF")}");
+                            BroadcastChecklistState();
+                        });
+                        break;
+                    }
+
+                    case "checklist_skip_hold":
+                    {
+                        _mainThreadQueue.Enqueue(() =>
+                        {
+                            SmartChecklistEngine.SkipCurrentHold();
+                            BroadcastChecklistState();
+                        });
                         break;
                     }
 
@@ -604,6 +626,6 @@ namespace ReentrySync
     {
         public const string PLUGIN_GUID = "com.reentry.sync";
         public const string PLUGIN_NAME = "Reentry Sync & Copilot";
-        public const string PLUGIN_VERSION = "1.0.0";
+        public const string PLUGIN_VERSION = "1.0.1";
     }
 }
