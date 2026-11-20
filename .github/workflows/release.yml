@@ -78,7 +78,7 @@ jobs:
           name: "ReentrySync ${{ steps.meta.outputs.tag }}"
           generate_release_notes: true
           body: |
-            ## 🚀 Quick 1-Click Install (Mod + BepInEx)
+            ## Quick 1-Click Install (Mod + BepInEx)
             Run this in **Windows PowerShell** (auto-detects Reentry, installs BepInEx 5.4.23.6 x64 if needed, and installs ReentrySync):
             ```powershell
             irm https://raw.githubusercontent.com/OttoApocalypse69/ReentrySync/main/scripts/install.ps1 | iex

@@ -286,7 +286,7 @@ namespace ReentrySync.Core
 
         private static IEnumerator AutoRunnerLoop()
         {
-            SetCopilotStatus("⚡ Auto-Copilot engaged. Scanning checklist...");
+            SetCopilotStatus("Auto-Copilot engaged. Scanning checklist...");
 
             while (IsAutoRunning)
             {
@@ -305,7 +305,7 @@ namespace ReentrySync.Core
                     }
 
                     // Done!
-                    SetCopilotStatus("✓ Checklist complete! Standing by.");
+                    SetCopilotStatus("[OK] Checklist complete! Standing by.");
                     IsAutoRunning = false;
                     CockpitPatches.NotifyChecklistUpdated();
                     yield break;
@@ -358,7 +358,7 @@ namespace ReentrySync.Core
                 // A. Check if switch/breaker/knob is already in required position
                 if (!isButton && IsControlAlreadySatisfied(cmd))
                 {
-                    SetCopilotStatus($"✓ {displayText} [ALREADY SET]");
+                    SetCopilotStatus($"[OK] {displayText} [ALREADY SET]");
                     yield return new WaitForSeconds(0.15f);
                     if (!inst.missionRelated)
                     {

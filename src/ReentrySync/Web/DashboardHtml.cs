@@ -542,14 +542,14 @@ namespace ReentrySync.Web
 <body>
     <header>
         <div class=""header-title"">
-            <span>🚀 REENTRY MISSION CONTROL</span>
+            <span>REENTRY MISSION CONTROL</span>
             <span style=""font-size:0.8rem; color:var(--text-dim);"">AUTONOMOUS GNC &amp; COPILOT</span>
         </div>
         <div class=""hdr-meta"">
             <span class=""pill met"" id=""hdr-met"">MET 000:00:00</span>
             <span class=""pill phase"" id=""hdr-phase"">STANDBY</span>
             <span class=""pill"" id=""hdr-soi"">EARTH</span>
-            <span class=""pill"" id=""hdr-mp"" style=""color:#a9cce3;"">👤 SOLO</span>
+            <span class=""pill"" id=""hdr-mp"" style=""color:#a9cce3;"">SOLO</span>
             <div class=""status-badge"">
                 <span class=""status-dot"" id=""statusDot""></span>
                 <span id=""statusText"">DISCONNECTED</span>
@@ -562,9 +562,9 @@ namespace ReentrySync.Web
         <button class=""nav-btn"" onclick=""switchTab('dsky', this)"">APOLLO DSKY</button>
         <button class=""nav-btn"" onclick=""switchTab('switchboard', this)"">SWITCHBOARD</button>
         <button class=""nav-btn"" onclick=""switchTab('checklist', this)"">CHECKLIST &amp; DIRECTOR</button>
-        <button class=""nav-btn"" onclick=""switchTab('autopilot', this)"">🧭 AUTOPILOT &amp; FLIGHT</button>
-        <button class=""nav-btn"" onclick=""switchTab('planner', this)"">🪐 ORBIT &amp; LUNAR LANDING</button>
-        <button class=""nav-btn"" onclick=""switchTab('multiplayer', this)"">👥 CREW CO-OP</button>
+        <button class=""nav-btn"" onclick=""switchTab('autopilot', this)"">AUTOPILOT &amp; FLIGHT</button>
+        <button class=""nav-btn"" onclick=""switchTab('planner', this)"">ORBIT &amp; LUNAR LANDING</button>
+        <button class=""nav-btn"" onclick=""switchTab('multiplayer', this)"">CREW CO-OP</button>
     </nav>
 
     <main>
@@ -663,14 +663,14 @@ namespace ReentrySync.Web
             <div class=""director-card"">
                 <div class=""director-top"">
                     <div>
-                        <div style=""font-size:0.75rem; color:var(--blue); font-weight:700; letter-spacing:1px;"">🤖 MET-AWARE AUTONOMOUS MISSION DIRECTOR</div>
+                        <div style=""font-size:0.75rem; color:var(--blue); font-weight:700; letter-spacing:1px;"">MET-AWARE AUTONOMOUS MISSION DIRECTOR</div>
                         <div style=""font-size:1.05rem; font-weight:700; margin-top:4px;"" id=""dir-rec-name"">Analyzing Mission Phase &amp; MET...</div>
                         <div style=""font-size:0.85rem; color:var(--text-dim); margin-top:2px;"" id=""dir-rec-reason"">Monitoring flight clock and telemetry...</div>
                     </div>
                     <div style=""display:flex; gap:8px; flex-wrap:wrap;"">
-                        <button class=""btn-auto"" style=""background:#2980b9; color:#fff; font-size:0.88rem;"" id=""btnDirectorAuto"" onclick=""toggleAutoDirector()"">🤖 AUTO-DIRECTOR: OFF</button>
-                        <button class=""btn-auto"" style=""font-size:0.88rem;"" onclick=""runRecommendedChecklist()"">▶ RUN RECOMMENDED</button>
-                        <button class=""speed-btn"" onclick=""resetDirectorTimeline()"">↺ RESET TIMELINE</button>
+                        <button class=""btn-auto"" style=""background:#2980b9; color:#fff; font-size:0.88rem;"" id=""btnDirectorAuto"" onclick=""toggleAutoDirector()"">AUTO-DIRECTOR: OFF</button>
+                        <button class=""btn-auto"" style=""font-size:0.88rem;"" onclick=""runRecommendedChecklist()"">RUN RECOMMENDED</button>
+                        <button class=""speed-btn"" onclick=""resetDirectorTimeline()"">RESET TIMELINE</button>
                     </div>
                 </div>
                 <div style=""font-family:var(--font-mono); font-size:0.8rem; color:#8fb2d4;"" id=""dir-last-action"">Standing by for MET triggers...</div>
@@ -692,9 +692,9 @@ namespace ReentrySync.Web
                         <p id=""chk-subtitle"" style=""color:var(--text-dim); font-size:0.9rem;"">Select a procedure above or open one in the spacecraft.</p>
                     </div>
                     <div style=""display:flex; gap:10px; flex-wrap:wrap;"">
-                        <button class=""btn-auto"" onclick=""executeNextChecklistStep()"">▶ NEXT STEP</button>
-                        <button class=""btn-auto"" style=""background:var(--blue); color:#fff;"" onclick=""toggleAutoRunner()"" id=""btnAutoToggle"">⚡ AUTO-COPILOT</button>
-                        <button class=""btn-danger"" onclick=""clearChecklist()"">✕ CLEAR</button>
+                        <button class=""btn-auto"" onclick=""executeNextChecklistStep()"">NEXT STEP</button>
+                        <button class=""btn-auto"" style=""background:var(--blue); color:#fff;"" onclick=""toggleAutoRunner()"" id=""btnAutoToggle"">AUTO-COPILOT</button>
+                        <button class=""btn-danger"" onclick=""clearChecklist()"">CLEAR</button>
                     </div>
                 </div>
 
@@ -725,7 +725,7 @@ namespace ReentrySync.Web
         <div id=""tab-autopilot"" class=""tab-content"">
             <div class=""card"" style=""margin-bottom:20px; border-color:#2c4a6e;"">
                 <div class=""card-header"">
-                    <span>🧭 ACTIVE FLIGHT COMPUTER STATUS</span>
+                    <span>ACTIVE FLIGHT COMPUTER STATUS</span>
                     <span id=""ap-mode-badge"" class=""pill"" style=""color:var(--green);"">OFF</span>
                 </div>
                 <div style=""font-family:var(--font-mono); font-size:1.05rem; color:#fff; margin-bottom:12px;"" id=""ap-detail"">Autopilot disengaged — manual control.</div>
@@ -741,16 +741,16 @@ namespace ReentrySync.Web
                 <!-- Orbital Attitude & Alignment -->
                 <div class=""card"">
                     <div class=""card-header"">ATTITUDE HOLD &amp; PLATFORM ALIGNMENT</div>
-                    <button class=""btn-auto"" style=""width:100%; background:#8e44ad; color:#fff; margin-bottom:12px;"" onclick=""sendAutopilotAlign()"">🎯 AUTO-ALIGN IMU / GDC / REFSMMAT</button>
+                    <button class=""btn-auto"" style=""width:100%; background:#8e44ad; color:#fff; margin-bottom:12px;"" onclick=""sendAutopilotAlign()"">AUTO-ALIGN IMU / GDC / REFSMMAT</button>
                     <div class=""ap-grid"">
-                        <button class=""ap-btn"" id=""apbtn-OFF"" onclick=""setApMode('OFF')"">⏹ DISENGAGE (OFF)</button>
-                        <button class=""ap-btn"" id=""apbtn-KILL_ROT"" onclick=""setApMode('KILL_ROT')"">🛑 KILL ROTATION</button>
-                        <button class=""ap-btn"" id=""apbtn-PROGRADE"" onclick=""setApMode('PROGRADE')"">➡ PROGRADE</button>
-                        <button class=""ap-btn"" id=""apbtn-RETROGRADE"" onclick=""setApMode('RETROGRADE')"">⬅ RETROGRADE</button>
-                        <button class=""ap-btn"" id=""apbtn-NORMAL"" onclick=""setApMode('NORMAL')"">⬆ NORMAL</button>
-                        <button class=""ap-btn"" id=""apbtn-ANTI_NORMAL"" onclick=""setApMode('ANTI_NORMAL')"">⬇ ANTI-NORMAL</button>
-                        <button class=""ap-btn"" id=""apbtn-RADIAL_IN"" onclick=""setApMode('RADIAL_IN')"">↙ RADIAL IN</button>
-                        <button class=""ap-btn"" id=""apbtn-RADIAL_OUT"" onclick=""setApMode('RADIAL_OUT')"">↗ RADIAL OUT</button>
+                        <button class=""ap-btn"" id=""apbtn-OFF"" onclick=""setApMode('OFF')"">DISENGAGE (OFF)</button>
+                        <button class=""ap-btn"" id=""apbtn-KILL_ROT"" onclick=""setApMode('KILL_ROT')"">KILL ROTATION</button>
+                        <button class=""ap-btn"" id=""apbtn-PROGRADE"" onclick=""setApMode('PROGRADE')"">PROGRADE</button>
+                        <button class=""ap-btn"" id=""apbtn-RETROGRADE"" onclick=""setApMode('RETROGRADE')"">RETROGRADE</button>
+                        <button class=""ap-btn"" id=""apbtn-NORMAL"" onclick=""setApMode('NORMAL')"">NORMAL</button>
+                        <button class=""ap-btn"" id=""apbtn-ANTI_NORMAL"" onclick=""setApMode('ANTI_NORMAL')"">ANTI-NORMAL</button>
+                        <button class=""ap-btn"" id=""apbtn-RADIAL_IN"" onclick=""setApMode('RADIAL_IN')"">RADIAL IN</button>
+                        <button class=""ap-btn"" id=""apbtn-RADIAL_OUT"" onclick=""setApMode('RADIAL_OUT')"">RADIAL OUT</button>
                     </div>
                 </div>
 
@@ -759,16 +759,16 @@ namespace ReentrySync.Web
                     <div class=""card-header"">AUTONOMOUS MISSION FLIGHT MODES</div>
                     <div style=""display:flex; flex-direction:column; gap:10px;"">
                         <button class=""ap-btn flight-mode"" id=""apbtn-AUTO_DOCK"" onclick=""setApMode('AUTO_DOCK')"">
-                            🤝 AUTO-DOCK (CSM ↔ LM)<br>
+                            AUTO-DOCK (CSM ↔ LM)<br>
                             <span style=""font-size:0.78rem; font-weight:400; color:#aac4dc;"">Aligns docking ports, nulls corridor drift &amp; closes smoothly to hard capture</span>
                         </button>
                         <button class=""ap-btn flight-mode"" id=""apbtn-AUTO_LAND"" onclick=""setApMode('AUTO_LAND')"">
-                            🌕 AUTO-LAND LUNAR MODULE (PDI → TOUCHDOWN)<br>
+                            AUTO-LAND LUNAR MODULE (PDI → TOUCHDOWN)<br>
                             <span style=""font-size:0.78rem; font-weight:400; color:#aac4dc;"">Braking burn, powered approach to target site, auto gear &amp; soft touchdown</span>
                         </button>
                         <div style=""display:flex; gap:8px; align-items:center;"">
                             <button class=""ap-btn flight-mode"" style=""flex:1;"" id=""apbtn-AUTO_ASCENT"" onclick=""startAutoAscent()"">
-                                🚀 AUTO-ASCENT (LUNAR LIFTOFF → ORBIT)<br>
+                                AUTO-ASCENT (LUNAR LIFTOFF → ORBIT)<br>
                                 <span style=""font-size:0.78rem; font-weight:400; color:#aac4dc;"">Stages descent stage, ignites APS &amp; gravity-turns into target lunar orbit</span>
                             </button>
                             <div class=""form-field"" style=""width:90px; margin:0;"">
@@ -778,10 +778,10 @@ namespace ReentrySync.Web
                         </div>
                         <div style=""display:flex; gap:10px;"">
                             <button class=""ap-btn flight-mode"" style=""flex:1;"" id=""apbtn-AUTO_BURN"" onclick=""setApMode('AUTO_BURN', false)"">
-                                🔥 EXECUTE PLANNED BURN (AT TIG)
+                                EXECUTE PLANNED BURN (AT TIG)
                             </button>
                             <button class=""ap-btn flight-mode"" style=""flex:1; background:#6e2c1b; border-color:#c0392b;"" onclick=""setApMode('AUTO_BURN', true)"">
-                                ⚡ IGNITE PLANNED BURN NOW
+                                IGNITE PLANNED BURN NOW
                             </button>
                         </div>
                     </div>
@@ -795,7 +795,7 @@ namespace ReentrySync.Web
                 <!-- Custom Burn Planner -->
                 <div class=""card"">
                     <div class=""card-header"">
-                        <span>🪐 ORBITAL BURN PLANNER &amp; COURSE CORRECTIONS</span>
+                        <span>ORBITAL BURN PLANNER &amp; COURSE CORRECTIONS</span>
                         <span class=""pill"" id=""pln-soi"">MOON</span>
                     </div>
                     <div style=""display:flex; gap:14px; flex-wrap:wrap; font-family:var(--font-mono); font-size:0.85rem; margin-bottom:14px; color:#a9c4de;"">
@@ -808,10 +808,10 @@ namespace ReentrySync.Web
 
                     <!-- Quick Smart Presets -->
                     <div style=""display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;"">
-                        <button class=""speed-btn"" onclick=""quickPlan('circ_pe', 60, 60)"">🌕 LOI / CIRC AT PE</button>
-                        <button class=""speed-btn"" onclick=""quickPlan('circ_ap', 60, 60)"">⭕ CIRC AT AP</button>
-                        <button class=""speed-btn"" onclick=""quickPlan('custom_orbit', 60, 60)"">🎯 60×60 NM ORBIT</button>
-                        <button class=""speed-btn"" onclick=""quickPlan('doi_60x8', 60, 8.5)"">📉 DOI 60×8.5 NM (PDI PREP)</button>
+                        <button class=""speed-btn"" onclick=""quickPlan('circ_pe', 60, 60)"">LOI / CIRC AT PE</button>
+                        <button class=""speed-btn"" onclick=""quickPlan('circ_ap', 60, 60)"">CIRC AT AP</button>
+                        <button class=""speed-btn"" onclick=""quickPlan('custom_orbit', 60, 60)"">60×60 NM ORBIT</button>
+                        <button class=""speed-btn"" onclick=""quickPlan('doi_60x8', 60, 8.5)"">DOI 60×8.5 NM (PDI PREP)</button>
                     </div>
 
                     <div class=""form-grid"">
@@ -863,9 +863,9 @@ namespace ReentrySync.Web
                     </div>
 
                     <div style=""display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;"">
-                        <button class=""btn-auto"" style=""background:var(--blue); color:#fff;"" onclick=""computeCustomBurn()"">🧮 COMPUTE BURN</button>
-                        <button class=""btn-auto"" style=""background:#27ae60; color:#fff;"" onclick=""uploadBurnToAgc()"">📡 UPLOAD PAD TO AGC</button>
-                        <button class=""btn-auto"" style=""background:#e67e22; color:#fff;"" onclick=""setApMode('AUTO_BURN', false)"">🔥 AUTO-EXECUTE AT TIG</button>
+                        <button class=""btn-auto"" style=""background:var(--blue); color:#fff;"" onclick=""computeCustomBurn()"">COMPUTE BURN</button>
+                        <button class=""btn-auto"" style=""background:#27ae60; color:#fff;"" onclick=""uploadBurnToAgc()"">UPLOAD PAD TO AGC</button>
+                        <button class=""btn-auto"" style=""background:#e67e22; color:#fff;"" onclick=""setApMode('AUTO_BURN', false)"">AUTO-EXECUTE AT TIG</button>
                     </div>
 
                     <!-- Planned Burn Solution Readout -->
@@ -882,7 +882,7 @@ namespace ReentrySync.Web
                 <!-- Interactive Lunar Landing Site Selector -->
                 <div class=""card"">
                     <div class=""card-header"">
-                        <span>🌕 LUNAR LANDING SITE SELECTOR</span>
+                        <span>LUNAR LANDING SITE SELECTOR</span>
                         <span style=""color:var(--green); font-family:var(--font-mono);"" id=""ls-dist"">DIST: -- NM</span>
                     </div>
                     <p style=""font-size:0.82rem; color:var(--text-dim); margin-bottom:10px;"">
@@ -922,8 +922,8 @@ namespace ReentrySync.Web
                     </div>
 
                     <div style=""display:flex; gap:10px; flex-wrap:wrap;"">
-                        <button class=""btn-auto"" style=""flex:1;"" onclick=""applyLandingSite(false)"">🎯 LOCK LANDING SITE &amp; ALIGN LM IMU</button>
-                        <button class=""btn-auto"" style=""background:#27ae60; color:#fff;"" onclick=""setApMode('AUTO_LAND')"">🌕 BEGIN AUTO-LAND</button>
+                        <button class=""btn-auto"" style=""flex:1;"" onclick=""applyLandingSite(false)"">LOCK LANDING SITE &amp; ALIGN LM IMU</button>
+                        <button class=""btn-auto"" style=""background:#27ae60; color:#fff;"" onclick=""setApMode('AUTO_LAND')"">BEGIN AUTO-LAND</button>
                     </div>
                     <div style=""font-family:var(--font-mono); font-size:0.8rem; color:#8fb2d4; margin-top:8px;"" id=""ls-active-info"">Active Target: --</div>
                 </div>
@@ -935,14 +935,14 @@ namespace ReentrySync.Web
             <!-- Connection Status Banner -->
             <div class=""card"" style=""margin-bottom:20px; border-color:#2c4a6e;"">
                 <div class=""card-header"">
-                    <span>👥 2–3 PLAYER APOLLO CREW CO-OP (FULL COCKPIT, AGC &amp; ORBIT SYNC)</span>
+                    <span>2–3 PLAYER APOLLO CREW CO-OP (FULL COCKPIT, AGC &amp; ORBIT SYNC)</span>
                     <span class=""pill"" id=""mp-mode-badge"" style=""color:#a9cce3;"">OFFLINE</span>
                 </div>
                 <div style=""font-family:var(--font-mono); font-size:0.95rem; color:#fff; margin-bottom:12px;"" id=""mp-status-text"">Offline — Single Player</div>
                 <div style=""display:flex; gap:10px; flex-wrap:wrap;"">
-                    <button class=""btn-auto"" style=""background:#27ae60; color:#fff;"" onclick=""mpTakeAuthority()"">🎮 TAKE FLIGHT CONTROL</button>
-                    <button class=""btn-auto"" style=""background:var(--blue); color:#fff;"" onclick=""mpForceSync()"">🔄 FORCE FULL COCKPIT &amp; AGC SYNC</button>
-                    <button class=""btn-danger"" onclick=""mpDisconnect()"">🔌 DISCONNECT</button>
+                    <button class=""btn-auto"" style=""background:#27ae60; color:#fff;"" onclick=""mpTakeAuthority()"">TAKE FLIGHT CONTROL</button>
+                    <button class=""btn-auto"" style=""background:var(--blue); color:#fff;"" onclick=""mpForceSync()"">FORCE FULL COCKPIT &amp; AGC SYNC</button>
+                    <button class=""btn-danger"" onclick=""mpDisconnect()"">DISCONNECT</button>
                 </div>
             </div>
 
@@ -979,8 +979,8 @@ namespace ReentrySync.Web
                         </div>
                     </div>
                     <div style=""display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;"">
-                        <button class=""btn-auto"" style=""flex:1;"" onclick=""mpHostDirect()"">🛰️ HOST MISSION (P2P)</button>
-                        <button class=""btn-auto"" style=""flex:1; background:var(--blue); color:#fff;"" onclick=""mpJoinDirect()"">🔗 JOIN CREW (P2P)</button>
+                        <button class=""btn-auto"" style=""flex:1;"" onclick=""mpHostDirect()"">HOST MISSION (P2P)</button>
+                        <button class=""btn-auto"" style=""flex:1; background:var(--blue); color:#fff;"" onclick=""mpJoinDirect()"">JOIN CREW (P2P)</button>
                     </div>
 
                     <hr style=""border-color:#1c2532; margin:14px 0;"">
@@ -1000,8 +1000,8 @@ namespace ReentrySync.Web
                         </div>
                     </div>
                     <div style=""display:flex; gap:10px; flex-wrap:wrap;"">
-                        <button class=""btn-auto"" style=""flex:1; background:#8e44ad; color:#fff;"" onclick=""mpConnectRelay(true)"">🌐 HOST VIA RELAY</button>
-                        <button class=""btn-auto"" style=""flex:1; background:#2980b9; color:#fff;"" onclick=""mpConnectRelay(false)"">🚀 JOIN VIA RELAY</button>
+                        <button class=""btn-auto"" style=""flex:1; background:#8e44ad; color:#fff;"" onclick=""mpConnectRelay(true)"">HOST VIA RELAY</button>
+                        <button class=""btn-auto"" style=""flex:1; background:#2980b9; color:#fff;"" onclick=""mpConnectRelay(false)"">JOIN VIA RELAY</button>
                     </div>
                 </div>
 
@@ -1098,7 +1098,7 @@ namespace ReentrySync.Web
 
             const crewCount = mp.crew ? mp.crew.length : 0;
             if (hdrMp) {{
-                hdrMp.innerText = mp.connected ? `👥 ${{crewCount}} CREW (${{mp.hasAuthority ? 'AUTH' : 'SYNC'}})` : '👤 SOLO';
+                hdrMp.innerText = mp.connected ? `${{crewCount}} CREW (${{mp.hasAuthority ? 'AUTH' : 'SYNC'}})` : 'SOLO';
                 hdrMp.style.color = mp.connected ? 'var(--green)' : '#a9cce3';
             }}
 
@@ -1107,7 +1107,7 @@ namespace ReentrySync.Web
                 if (mp.crew && mp.crew.length > 0) {{
                     let html = '';
                     mp.crew.forEach(c => {{
-                        const authTag = c.hasAuth ? '<span class=""step-badge"" style=""color:#f1c40f;"">👑 FLIGHT CONTROL</span>' : '';
+                        const authTag = c.hasAuth ? '<span class=""step-badge"" style=""color:#f1c40f;"">FLIGHT CONTROL</span>' : '';
                         const hostTag = c.isHost ? '<span class=""step-badge"" style=""color:var(--green);"">HOST</span>' : '';
                         html += `
                             <div class=""timeline-row ${{c.hasAuth ? 'due' : ''}}"">
@@ -1215,7 +1215,7 @@ namespace ReentrySync.Web
 
             const btn = document.getElementById('btnDirectorAuto');
             if (btn) {{
-                btn.innerText = autoDirectorOn ? '🤖 AUTO-DIRECTOR: ON' : '🤖 AUTO-DIRECTOR: OFF';
+                btn.innerText = autoDirectorOn ? 'AUTO-DIRECTOR: ON' : 'AUTO-DIRECTOR: OFF';
                 btn.style.background = autoDirectorOn ? '#27ae60' : '#2980b9';
             }}
 
@@ -1224,7 +1224,7 @@ namespace ReentrySync.Web
                 let html = '';
                 d.timeline.forEach(item => {{
                     const cls = item.completed ? 'timeline-row done' : (item.isDue ? 'timeline-row due' : 'timeline-row');
-                    const icon = item.completed ? '✓' : (item.isDue ? '▶' : '•');
+                    const icon = item.completed ? '[OK]' : (item.isDue ? '[DUE]' : '-');
                     html += `
                         <div class=""${{cls}}"">
                             <span class=""step-badge"">${{item.time}}</span>
@@ -1482,7 +1482,7 @@ namespace ReentrySync.Web
             const banner = document.getElementById('copilotBanner');
             const statusText = document.getElementById('copilotStatusText');
             if (btn) {{
-                btn.innerText = isAuto ? '⏹ STOP COPILOT' : '⚡ AUTO-COPILOT';
+                btn.innerText = isAuto ? 'STOP COPILOT' : 'AUTO-COPILOT';
                 btn.style.background = isAuto ? '#e67e22' : 'var(--blue)';
             }}
             if (banner) {{
@@ -1559,7 +1559,7 @@ namespace ReentrySync.Web
                 data.steps.forEach((s, idx) => {{
                     const cls = idx === 0 ? 'step-item current' : (s.ok ? 'step-item ok' : 'step-item');
                     const badgeColor = s.ok ? 'var(--green)' : (idx === 0 ? '#f1c40f' : 'var(--blue)');
-                    const okTag = s.ok ? '<span class=""step-badge"" style=""color:var(--green);"">✓ SET</span>' : '';
+                    const okTag = s.ok ? '<span class=""step-badge"" style=""color:var(--green);"">SET</span>' : '';
                     html += `
                         <div class=""${{cls}}"">
                             <span class=""step-badge"" style=""color:${{badgeColor}};"">#${{idx + 1}}</span>

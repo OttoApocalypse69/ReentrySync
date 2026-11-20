@@ -439,14 +439,14 @@ namespace ReentrySync.Core
             ApplyCraftDeltaV(burnDir, dvStepFps);
             BurnDvRemainingFps -= dvStepFps;
 
-            PhaseDetail = $"🔥 BURNING {plan.Engine} | ΔV Rem: {BurnDvRemainingFps:0.1} ft/s | Err {err:0.1}°";
+            PhaseDetail = $"BURNING {plan.Engine} | dV Rem: {BurnDvRemainingFps:0.1} ft/s | Err {err:0.1}°";
 
             if (BurnDvRemainingFps <= 0.08f)
             {
                 SafeCutoffEngines();
                 _burnActive = false;
                 BurnDvRemainingFps = 0f;
-                PhaseDetail = $"✓ Burn Complete: {plan.Name}! Holding attitude.";
+                PhaseDetail = $"[OK] Burn Complete: {plan.Name}! Holding attitude.";
                 Mode = AutopilotMode.KILL_ROT;
             }
         }
@@ -566,7 +566,7 @@ namespace ReentrySync.Core
                     {
                         lm.DockNow(true);
                     }
-                    PhaseDetail = "✓ HARD DOCK ACHIEVED! Capture latches engaged.";
+                    PhaseDetail = "[OK] HARD DOCK ACHIEVED! Capture latches engaged.";
                     Mode = AutopilotMode.KILL_ROT;
                     return;
                 }
@@ -649,7 +649,7 @@ namespace ReentrySync.Core
             {
                 dps.SetAutomaticThrust(0f);
                 dps.Cutoff();
-                PhaseDetail = $"✓ CONTACT LIGHT! Lunar Touchdown at {BurnPlannerBridge.SelectedLandingSiteName} (V/S {vSpeedFps:0.1} ft/s)";
+                PhaseDetail = $"[OK] CONTACT LIGHT! Lunar Touchdown at {BurnPlannerBridge.SelectedLandingSiteName} (V/S {vSpeedFps:0.1} ft/s)";
                 Mode = AutopilotMode.OFF;
                 return;
             }
@@ -790,7 +790,7 @@ namespace ReentrySync.Core
             if (curApNm >= TargetAscentOrbitNm && altFt > 45000)
             {
                 aps.Cutoff();
-                PhaseDetail = $"✓ LUNAR ORBIT INSERTION ACHIEVED! Ap {curApNm:0.1} NM — Circularizing next...";
+                PhaseDetail = $"[OK] LUNAR ORBIT INSERTION ACHIEVED! Ap {curApNm:0.1} NM — Circularizing next...";
                 // Auto-plan circularization burn at Apolune!
                 BurnPlannerBridge.PlanOrbitBurn("circ_ap", TargetAscentOrbitNm, TargetAscentOrbitNm, 180f, 0f, "Prograde", "LM_Translation");
                 Mode = AutopilotMode.PROGRADE;
@@ -829,7 +829,7 @@ namespace ReentrySync.Core
                 }
             }
 
-            PhaseDetail = $"🚀 AUTO-ASCENT: Alt {altFt:0} ft | Pitch {90f - pitchFromVerticalDeg:0}° | Ap {curApNm:0.1} / {TargetAscentOrbitNm:0} NM";
+            PhaseDetail = $"AUTO-ASCENT: Alt {altFt:0} ft | Pitch {90f - pitchFromVerticalDeg:0}° | Ap {curApNm:0.1} / {TargetAscentOrbitNm:0} NM";
         }
 
         public static string BuildAutopilotJson()
